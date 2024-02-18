@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace csharp
 {
     public class GildedRose
     {
-        IList<Item> Items;
-        public GildedRose(IList<Item> Items)
+        IList<IBaseItem> Items;
+        public GildedRose(IList<IBaseItem> Items)
         {
             this.Items = Items;
         }
@@ -20,7 +21,7 @@ namespace csharp
                     {
                         if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
                         {
-                            Items[i].Quality = Items[i].Quality - 1;
+                            this.DegradeQuality(Items[i]);
                         }
                     }
                 }
@@ -66,7 +67,7 @@ namespace csharp
                             {
                                 if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
                                 {
-                                    Items[i].Quality = Items[i].Quality - 1;
+                                    this.DegradeQuality(Items[i]);
                                 }
                             }
                         }
@@ -83,6 +84,25 @@ namespace csharp
                         }
                     }
                 }
+            }
+        }
+
+        private void DegradeQuality(IBaseItem item)
+        {
+            if (item is ItemConjurado)
+            {
+                if (item.Quality >= 2)
+                {
+                    item.Quality -= 2;
+                }
+                else
+                {
+                    item.Quality = 0;
+                }
+            }
+            else
+            {
+                item.Quality--;
             }
         }
     }

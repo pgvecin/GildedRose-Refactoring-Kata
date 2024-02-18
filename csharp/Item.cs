@@ -1,6 +1,6 @@
 ﻿namespace csharp
 {
-    public class Item
+    public class Item : IBaseItem
     {
         public string Name { get; set; }
         public int SellIn { get; set; }
@@ -9,6 +9,6 @@
         public override string ToString()
         {
             return this.Name + ", " + this.SellIn + ", " + this.Quality;
-        }  
+        }
     }
 }
